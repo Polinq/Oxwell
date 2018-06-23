@@ -2,8 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.action_chains import ActionChains
 
-driver = webdriver.Chrome('/Users/user/Documents/chromedriver')
+driver = webdriver.Chrome('/Users/polinasobolevska/Documents/chromedriver')
 driver.get("http://127.0.0.1/oxwall/")
 
 driver.implicitly_wait(10)
@@ -31,9 +32,8 @@ save = driver.find_element_by_name("save")
 save.click()
 
 logout_button = driver.find_element_by_class_name("ow_console_item_link")
-menu = webdriver.ActionChains(driver).move_to_element("ow_console_item_link")
 
-submenu = menu.find_element_by_class_name("ow_console_item_link")[6]
-submenu.click()
+ActionChains(driver).move_to_element(driver.find_element_by_link_text("Admin")).perform()
+driver.find_element_by_link_text("Sign Out").click()
 
 driver.quit()
